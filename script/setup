@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Creates symbolic links to all the specified files in the $HOME directory
+
+DOTFILES_ROOT="$HOME/.dotfiles"
+
+echo "Setting up symlinks"
+
+ln -fs "$DOTFILES_ROOT/zsh/.zshrc.symlink" "$HOME/.zshrc"
+
+echo "Done"
