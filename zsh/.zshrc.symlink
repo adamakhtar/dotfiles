@@ -1,1 +1,4 @@
 echo 'Hello world'
+
+# source every .zsh file in this rep
+for config_file ($HOME/.dotfiles/**/*.zsh) source $config_file
