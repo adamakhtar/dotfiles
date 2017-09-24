@@ -1,4 +1,11 @@
-echo 'Hello world'
+DOTFILES_ROOT="$HOME/.dotfiles"
 
-# source every .zsh file in this rep
-for config_file ($HOME/.dotfiles/**/*.zsh) source $config_file
+# Start oh-my-zsh
+export ZSH=/Users/adam/.oh-my-zsh
+ZSH_THEME="agnoster"
+plugins=()
+source $ZSH/oh-my-zsh.sh
+
+# source every .zsh file in this repo
+for config_file ($DOTFILES_ROOT/**/*.zsh) source $config_file
+
