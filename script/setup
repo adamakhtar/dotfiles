@@ -7,5 +7,8 @@ DOTFILES_ROOT="$HOME/.dotfiles"
 echo "Setting up symlinks"
 
 ln -fs "$DOTFILES_ROOT/zsh/.zshrc.symlink" "$HOME/.zshrc"
+ln -fs "$DOTFILES_ROOT/git/.gitconfig.symlink" "$HOME/.gitconfig"
+ln -fs "$DOTFILES_ROOT/git/.gitmessage.symlink" "$HOME/.gitmessage"
+ln -fs "$DOTFILES_ROOT/git/.gitignore.symlink" "$HOME/.gitignore"
 
 echo "Done"

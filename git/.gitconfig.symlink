@@ -1,0 +1,74 @@
+[push]
+  default = current
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  ui = auto
+[alias]
+  aa = add --all
+  ap = add --patch
+  branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+  ca = commit --amend -v
+  ci = commit -v
+  co = checkout
+  st = status
+
+  # ammend without opening editor - commit and resuse C.A.R.
+  car = commit --amend --no-edit
+
+  # grep the logs for given term. -E extended regular expressions / -i case insensitve
+  glog = log -E -i --grep
+
+  # search for added or removed lines with given term
+  slog = log -S
+
+  # short log all - concise version of standard log output
+  sla = log --oneline --decorate --graph --all
+
+  # short log all pretty - more information than 'git sla' and with pretty colors
+  slap = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
+
+  # rebase and autosquah the last 10 commits
+  raten = rebase -i --autosquash HEAD~10
+
+  uncommit = reset --soft HEAD^
+  unstage = reset HEAD
+
+  # find commit when a file was deleted
+  # e.g git removed app/view/somefile.html
+  removed = rev-list -n 1 HEAD --
+
+  # restore a file which was deleted
+  # git unremove path_to_file
+  # git unremove app/views/hello.html.erb
+  unremove = "!f() { git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"; }; f"
+
+
+  # List all your branches in date asc order of their last commit
+  # E.g.
+  # 2017-05-16 aa-debug-codeship
+  # 2017-05-16 aa-plan-css-codeship-malarky
+  # 2017-05-17 aa-stripe-api-upgrade-codeship-malarky
+  #
+  bstat = for-each-ref --sort=committerdate refs/heads/ --format='%(color:bold yellow) %(committerdate:short) %(color:reset) %(refname:short)'
+[core]
+  excludesfile = /Users/adam/.gitignore
+  autocrlf = input
+[commit]
+  template = ~/.gitmessage
+[fetch]
+  prune = true
+[rebase]
+  autosquash = true
+[include]
+  path = ~/.gitconfig.local
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
+[mergetool "sourcetree"]
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+[user]
+  name = Adam Akhtar
+  email = adam.akhtar@gmail.com
