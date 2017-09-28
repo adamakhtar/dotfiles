@@ -1,4 +1,4 @@
-DOTFILES_ROOT="$HOME/.dotfiles"
+export DOTFILES_ROOT=$HOME/.dotfiles
 
 # Start oh-my-zsh
 export ZSH=/Users/adam/.oh-my-zsh
