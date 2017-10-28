@@ -1,5 +1,9 @@
 # Adam's Dotfiles
 
+Setup assumes you have:
+- installed oh-my-zsh and made zsh the default shell. 
+- installed powerline fonts and configured your terminal to use them
+
 How to setup these dotfiles:
 
 1) Clone the repo into your $HOME directory
@@ -44,8 +48,8 @@ If you want another dotfile in your $HOME directory, first add it to this projec
 
 If you want to add more zsh files for things like aliases then simply create a file with a .zsh extension and these will be autoloaded by the file zsh/.zshrc.symlink 
 
+## TODO
 
-
-
-
-
+- install oh-my-zsh on script/setup
+- add powerline fonts to repo and install on script/setup
+- add iterm color config to repo
