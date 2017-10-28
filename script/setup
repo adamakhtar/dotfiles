@@ -2,7 +2,7 @@
 #
 # Creates symbolic links to all the specified files in the $HOME directory
 
-DOTFILES_DIR=$HOME/.dotfiles
+DOTFILES_DIR=$HOME/dotfiles
 
 echo "Setting up symlinks"
 
