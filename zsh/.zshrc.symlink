@@ -1,5 +1,6 @@
 export DOTFILES_ROOT=$HOME/.dotfiles
 
+
 # Start oh-my-zsh
 export ZSH=/Users/adam/.oh-my-zsh
 ZSH_THEME="agnoster"
@@ -8,4 +9,11 @@ source $ZSH/oh-my-zsh.sh
 
 # source every .zsh file in this repo
 for config_file ($DOTFILES_ROOT/**/*.zsh) source $config_file
+
+# add our custom functions to the path
+fpath=($DOTFILES_ROOT/functions $fpath)
+autoload -Uz $DOTFILES_ROOT/functions/*(:t)
+
+
+
 
