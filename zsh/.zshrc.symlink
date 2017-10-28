@@ -3,7 +3,7 @@ export DOTFILES_ROOT=$HOME/.dotfiles
 # Start oh-my-zsh
 export ZSH=/Users/adam/.oh-my-zsh
 ZSH_THEME="agnoster"
-plugins=()
+plugins=(history battery z)
 source $ZSH/oh-my-zsh.sh
 
 # source every .zsh file in this repo
