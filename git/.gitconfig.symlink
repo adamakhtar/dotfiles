@@ -8,14 +8,22 @@
 [alias]
   aa = add --all
   ap = add --patch
+  bc = branch --contains
   branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
-  ca = commit --amend -v
   ci = commit -v
   co = checkout
-  st = status
+  st = status -sb             # preferred status behaviour - be concise
+  ste = status                # alias to default status behaviour
+  rc = rebase --continue
+  ra = rebase --abort
 
-  # ammend without opening editor - commit and resuse C.A.R.
-  car = commit --amend --no-edit
+  # delete a branch locally and on origin remote
+  nuke = "!f(){ git branch -d \"$1\" && git push origin --delete \"$1\"; };f"
+  # same as nuke but will delete the branch even if it isnt merged into master
+  nukehard = "!f(){ git branch -D \"$1\" && git push origin --delete \"$1\"; };f"
+
+  ca = commit --amend -v           # amend
+  car = commit --amend --no-edit   # amend without opening editor - commit and resuse C.A.R.
 
   # grep the logs for given term. -E extended regular expressions / -i case insensitve
   glog = log -E -i --grep
