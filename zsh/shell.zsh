@@ -1,5 +1,5 @@
 # Shell aliases
-
+alias reload='source ~/.zshrc'
 alias cp='cp -i'                           # Preferred 'cp' implementation - ask for confirmation
 alias mv='mv -i'                           # Preferred 'mv' implementation - ask for confirmation
 
