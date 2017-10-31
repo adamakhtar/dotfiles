@@ -16,7 +16,7 @@
   ste = status                # alias to default status behaviour
   rc = rebase --continue
   ra = rebase --abort
-
+  ss = stash save
   # delete a branch locally and on origin remote
   nuke = "!f(){ git branch -d \"$1\" && git push origin --delete \"$1\"; };f"
   # same as nuke but will delete the branch even if it isnt merged into master
