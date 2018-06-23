@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-# Shortcut to search current folder for git conflict markers
-ag "<<<"
-ag ">>>"

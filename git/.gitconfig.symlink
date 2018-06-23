@@ -22,6 +22,9 @@
   # same as nuke but will delete the branch even if it isnt merged into master
   nukehard = "!f(){ git branch -D \"$1\" && git push origin --delete \"$1\"; };f"
 
+  # yet to be deployed to production
+  undeployed = "!f(){ git fetch production origin && git log production/master..origin/master; };f"
+
   ca = commit --amend -v           # amend
   car = commit --amend --no-edit   # amend without opening editor - commit and resuse C.A.R.
 
@@ -59,7 +62,7 @@
   # 2017-05-16 aa-plan-css-codeship-malarky
   # 2017-05-17 aa-stripe-api-upgrade-codeship-malarky
   #
-  bstat = for-each-ref --sort=committerdate refs/heads/ --format='%(color:bold yellow) %(committerdate:short) %(color:reset) %(refname:short)'
+  bst = for-each-ref --sort=committerdate refs/heads/ --format='%(color:bold yellow) %(committerdate:short) %(color:reset) %(refname:short)'
 [core]
   excludesfile = /Users/adam/.gitignore
   autocrlf = input
