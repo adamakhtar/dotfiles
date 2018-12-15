@@ -1,5 +1,5 @@
 # Shell aliases
-alias reload='source ~/.zshrc'
+alias reload!='source ~/.zshrc'
 alias dotfiles='code ~/dotfiles'
 
 alias cp='cp -i'                           # Preferred 'cp' implementation - ask for confirmation

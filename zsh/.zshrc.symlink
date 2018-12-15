@@ -2,7 +2,7 @@ export DOTFILES_ROOT=$HOME/dotfiles
 
 
 # Start oh-my-zsh
-export ZSH=/Users/adam/.oh-my-zsh
+export ZSH=/Users/robodisco/.oh-my-zsh
 ZSH_THEME="agnoster"
 plugins=(history battery z)
 source $ZSH/oh-my-zsh.sh
@@ -17,3 +17,25 @@ autoload -Uz $DOTFILES_ROOT/functions/*(:t)
 
 
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.bin:$PATH"
+
+# recommended by brew doctor
+export PATH="/usr/local/bin:$PATH"
+source /Users/robodisco/.asdf/asdf.sh
+
+# set the username displayed on CLI prompt to just be blank to save space
+prompt_context() {}
+
+export PATH="$HOME/.rbenv/shims:$PATH"
+
+
+# remove this - just for testing nikkei on android
+# https://github.com/TacchiStudios/nikkei-solmu-react-native/issues/302
+export ANDROID_HOME=/Users/robodisco/Library/Android/sdk
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export PATH=~/Library/Android/sdk/platform-tools:$PATH

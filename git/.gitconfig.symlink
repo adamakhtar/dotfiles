@@ -83,3 +83,5 @@
 [user]
   name = Adam Akhtar
   email = adam.akhtar@gmail.com
+[url "ssh://git@heroku.com/"]
+	insteadOf = https://git.heroku.com/

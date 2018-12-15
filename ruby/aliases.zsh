@@ -1,7 +1,7 @@
 alias b="bundle"
 alias be='bundle exec'
 alias br='bin/rake'
-alias brs='bin/rspec'
+alias brs='be rspec'
 alias brsb='git diff --name-only master | grep _spec.rb | xargs bundle exec rspec' # run only the specs you have changed in current branch
 alias brc='bin/rails console'
 alias brgmig='bin/rails generate migration'
@@ -19,11 +19,14 @@ alias pgr='brew services restart postgres'
 alias pgs='brew services stop postgres'
 alias pgl='cat /usr/local/var/postgres/server.log'
 alias ws='./bin/webpack-dev-server'
+alias rc='be rubocop'
+alias rca='be rubocop -a'
 
 # Kill rails server process e.g. `krs 3000`
 function krs() { kill -9 $(lsof -i tcp:$1 -t) }
 
 function dbnuke() { be rake db:drop db:create && brdp }
+function dbnuke_test() { be rake db:drop db:create db:schema:load RAILS_ENV=test }
 
 # Use ngrok with a pow domain
 # See https://ngrok.com/faq
