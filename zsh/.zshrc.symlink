@@ -1,11 +1,11 @@
 export DOTFILES_ROOT=$HOME/dotfiles
 
-
 # Start oh-my-zsh
 export ZSH=/Users/robodisco/.oh-my-zsh
 ZSH_THEME="agnoster"
 plugins=(history battery z)
 source $ZSH/oh-my-zsh.sh
+
 
 # source every .zsh file in this repo
 for config_file ($DOTFILES_ROOT/**/*.zsh) source $config_file
@@ -14,13 +14,6 @@ for config_file ($DOTFILES_ROOT/**/*.zsh) source $config_file
 fpath=($DOTFILES_ROOT/functions $fpath)
 autoload -Uz $DOTFILES_ROOT/functions/*(:t)
 
-
-
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$HOME/.bin:$PATH"
 
@@ -33,9 +26,61 @@ prompt_context() {}
 
 export PATH="$HOME/.rbenv/shims:$PATH"
 
+# allow utf8 characters in ruby console
+# See: https://stackoverflow.com/a/44556239
+export LANG="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
-# remove this - just for testing nikkei on android
-# https://github.com/TacchiStudios/nikkei-solmu-react-native/issues/302
-export ANDROID_HOME=/Users/robodisco/Library/Android/sdk
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-export PATH=~/Library/Android/sdk/platform-tools:$PATH
+# Set VS Vode as default editor
+export EDITOR="code -w"
+
+# Set editor for handling merges during rspec rails:update
+export THOR_MERGE="code -w"
+
+# android dev env vars as per
+# https://facebook.github.io/react-native/docs/getting-started.html
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export NVM_DIR=~/.nvm
+source ~/.nvm/nvm.sh
+
+# autoload node version via nvm if .nvmrc file is present in current dir
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# for Haskell's GHCUP
+export PATH="$HOME/.cabal/bin:${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/bin:$PATH"
+
+# for Go
+# See: https://www.callicoder.com/golang-installation-setup-gopath-workspace/
+export GOPATH="$HOME/go"

@@ -2,6 +2,7 @@ alias b="bundle"
 alias be='bundle exec'
 alias br='bin/rake'
 alias brs='be rspec'
+alias brsf 'be rspec --only-failures'
 alias brsb='git diff --name-only master | grep _spec.rb | xargs bundle exec rspec' # run only the specs you have changed in current branch
 alias brc='bin/rails console'
 alias brgmig='bin/rails generate migration'
@@ -31,4 +32,4 @@ function dbnuke_test() { be rake db:drop db:create db:schema:load RAILS_ENV=test
 # Use ngrok with a pow domain
 # See https://ngrok.com/faq
 # > ngrokpow my-rails-project.dev
-function ngrokpow { ~/code/archive/ngrok http -host-header=$1 80 }
+function ngrokpow { ~/Projects/archive/ngrok http -host-header=$1 80 }

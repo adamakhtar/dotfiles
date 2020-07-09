@@ -1,6 +1,7 @@
 # Shell aliases
 alias reload!='source ~/.zshrc'
 alias dotfiles='code ~/dotfiles'
+alias myblog='cd ~/projects/active/blogs/adamakhtar'
 
 alias cp='cp -i'                           # Preferred 'cp' implementation - ask for confirmation
 alias mv='mv -i'                           # Preferred 'mv' implementation - ask for confirmation
