@@ -10,5 +10,6 @@ ln -fs "$DOTFILES_DIR/zsh/.zshrc.symlink" "$HOME/.zshrc"
 ln -fs "$DOTFILES_DIR/git/.gitconfig.symlink" "$HOME/.gitconfig"
 ln -fs "$DOTFILES_DIR/git/.gitmessage.symlink" "$HOME/.gitmessage"
 ln -fs "$DOTFILES_DIR/git/.gitignore.symlink" "$HOME/.gitignore"
+ln -fs "$DOTFILES_DIR/git/.gitignore_global.symlink" "$HOME/.gitignore_global"
 
 echo "Done"

@@ -64,7 +64,7 @@
   #
   bst = for-each-ref --sort=committerdate refs/heads/ --format='%(color:bold yellow) %(committerdate:short) %(color:reset) %(refname:short)'
 [core]
-	excludesfile = /Users/robodisco/.gitignore
+	excludesfile = /Users/robodisco/.gitignore_global
   autocrlf = input
 [commit]
 	template = ~/.gitmessage
