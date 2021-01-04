@@ -11,5 +11,6 @@ ln -fs "$DOTFILES_DIR/git/.gitconfig.symlink" "$HOME/.gitconfig"
 ln -fs "$DOTFILES_DIR/git/.gitmessage.symlink" "$HOME/.gitmessage"
 ln -fs "$DOTFILES_DIR/git/.gitignore.symlink" "$HOME/.gitignore"
 ln -fs "$DOTFILES_DIR/git/.gitignore_global.symlink" "$HOME/.gitignore_global"
+ln -fs "$DOTFILES_DIR/ruby/.railsrc.symlink" "$HOME/.railsrc"
 
 echo "Done"

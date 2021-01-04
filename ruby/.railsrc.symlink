@@ -1,0 +1,7 @@
+# ~/dotfiles/.railsrc
+
+--database=postgresql
+--webpack
+--skip-jbuilder
+--skip-test
+--skip-system-test
