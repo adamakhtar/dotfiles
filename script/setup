@@ -2,7 +2,7 @@
 #
 # Creates symbolic links to all the specified files in the $HOME directory
 
-DOTFILES_DIR=$HOME/dotfiles
+DOTFILES_DIR=$HOME/Projects/archive/dotfiles
 
 echo "Setting up symlinks"
 
@@ -12,5 +12,6 @@ ln -fs "$DOTFILES_DIR/git/.gitmessage.symlink" "$HOME/.gitmessage"
 ln -fs "$DOTFILES_DIR/git/.gitignore.symlink" "$HOME/.gitignore"
 ln -fs "$DOTFILES_DIR/git/.gitignore_global.symlink" "$HOME/.gitignore_global"
 ln -fs "$DOTFILES_DIR/ruby/.railsrc.symlink" "$HOME/.railsrc"
+ln -fs "$DOTFILES_DIR/ruby/.gemrc.symlink" "$HOME/.gemrc"
 
 echo "Done"

@@ -1,16 +1,39 @@
 # Adam's Dotfiles
 
 Setup assumes you have:
-- installed oh-my-zsh and made zsh the default shell.
-- installed powerline fonts and configured your terminal to use them
+- installed brew
+- installed https://github.com/asdf-vm/asdf and
+  Ruby https://github.com/asdf-vm/asdf-ruby
+  nodejs https://github.com/asdf-vm/asdf-nodejs.git
+- installed bundler and rails gems
+- installed https://github.com/zplug/zplug via installer script (not brew)
+
+Post Setup
+- setup Iterm2 with desired font and theme (See iterm_theme directory)
+- activate setting sync in VSCode via Code / Preferences / Turn on Settings Sync
+- log into Firefox account and sync bookmarks
+- log into dropbox (to get alfred settings)
+- download alfred3 (cant use brew casks as they download 4) and apply licence and set preferences folder to Dropbox (MAKE SURE dropbox folder is fully synced)
+- add ssh keys to github account.
+  - cat ~/.ssh/id_rsa.pub
+  - paste it into your [github settings panel](https://github.com/settings/ssh)
+  - run `ssh -T git@github.com` to test setup is correct.
+
+Not required but I like using:
+Cascadia font for use in terminal and vscode https://github.com/microsoft/cascadia-code
+
 
 How to setup these dotfiles:
 
-1) Clone the repo into your $HOME directory
+1) Clone the repo into your Projects/archive/dotfiles
 
-2) `cd .dotfiles`
+2) `cd dotfiles`
 
-3) `script/setup` to symlink all the dotfiles in the repo into your $HOME dir
+3) install dependences listed above (e.g. brew etc)
+
+4) run `brew bundle --file Brewfile`
+
+5) `script/setup` to symlink all the dotfiles in the repo into your $HOME dir
 
 ## Folder structure
 
@@ -24,10 +47,17 @@ aliases for Ruby and Ruby on Rails projects
 scripts to help setup your $HOME folder with this project's dotfiles
 
 **zsh/**
-configuration for zshrc and oh-my-zsh
+configuration for zshrc. Plugins for zsh are managed by zplug. When you add a plugin to the .zshrc file you have to run `zplug install` on the command line.
 
 **media/**
 anything related to working with media such as MP3s, Youtube etc
+
+**keyboard**
+karabiner keyboard settings. Uses `goku`. To generate the karabine.json file in ~/.config/karabiner/ cd into the dotfile's keyboard directory and run:
+ `GOKU_EDN_CONFIG_FILE="karabiner.edm" goku`
+
+**item_themes**
+Contains themes for iterm. Open a profile settings in Iterm and import
 
 
 **functions/**

@@ -1,11 +1,18 @@
-export DOTFILES_ROOT=$HOME/dotfiles
+export DOTFILES_ROOT=$HOME/Projects/archive/dotfiles
 
-# Start oh-my-zsh
-export ZSH=/Users/robodisco/.oh-my-zsh
-ZSH_THEME="agnoster"
-plugins=(history battery z)
-source $ZSH/oh-my-zsh.sh
+# add vscode so we can call `code /my_project` on the command line
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# add bin directory to the path
+export PATH="$DOTFILES_ROOT/bin:$PATH"
+
+export PATH="$HOME/.bin:$PATH"
+
+# recommended by brew doctor
+export PATH="/usr/local/bin:$PATH"
+
+# add each topic folder to fpath so that they can add functions and completion scripts
+for topic_folder ($DOTFILES_ROOT/*) if [ -d $topic_folder ]; then  fpath=($topic_folder $fpath); fi;
 
 # source every .zsh file in this repo
 for config_file ($DOTFILES_ROOT/**/*.zsh) source $config_file
@@ -14,17 +21,23 @@ for config_file ($DOTFILES_ROOT/**/*.zsh) source $config_file
 fpath=($DOTFILES_ROOT/functions $fpath)
 autoload -Uz $DOTFILES_ROOT/functions/*(:t)
 
+# must come before custom compinit definitions
+source $HOME/.asdf/asdf.sh
 
-export PATH="$HOME/.bin:$PATH"
+# To make Homebrew’s completions available in zsh, you must get the Homebrew-managed 
+# zsh site-functions on your FPATH before initialising zsh’s completion facility. 
+# Add the following to your ~/.zshrc file:
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
-# recommended by brew doctor
-export PATH="/usr/local/bin:$PATH"
-source /Users/robodisco/.asdf/asdf.sh
+  autoload -Uz compinit
+  compinit
+fi
+
 
 # set the username displayed on CLI prompt to just be blank to save space
-prompt_context() {}
-
-export PATH="$HOME/.rbenv/shims:$PATH"
+rompt_context() {}
 
 # allow utf8 characters in ruby console
 # See: https://stackoverflow.com/a/44556239
@@ -43,44 +56,21 @@ export EDITOR="code -w"
 # Set editor for handling merges during rspec rails:update
 export THOR_MERGE="code -w"
 
-# android dev env vars as per
-# https://facebook.github.io/react-native/docs/getting-started.html
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-export NVM_DIR=~/.nvm
-source ~/.nvm/nvm.sh
-
-# autoload node version via nvm if .nvmrc file is present in current dir
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-# for Haskell's GHCUP
-export PATH="$HOME/.cabal/bin:${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/bin:$PATH"
 
 # for Go
 # See: https://www.callicoder.com/golang-installation-setup-gopath-workspace/
 export GOPATH="$HOME/go"
+
+
+################
+#  P L U G I N S 
+################
+
+# remember to to run `zplug install` command every time you add a new plugin
+
+source ~/.zplug/init.zsh
+zplug "zsh-users/zsh-completions" 
+zplug "mafredri/zsh-async", from:github
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug load
