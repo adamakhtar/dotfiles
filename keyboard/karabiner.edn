@@ -1,3 +1,4 @@
+;; GOKU_EDN_CONFIG_FILE="karabiner.edm" goku
 ;; main contains multiple manipulators
 ;; each manipulator has a description and multiple rules
 
@@ -5,10 +6,10 @@
 ;; manipulator         -> {:des "..." :rules [rule1 rule2 ...]}
 ;; manipulator's rules -> [rule1 rule2 ...]
 {
-  :alone 500
-  :delay 200
-  :held 500
-  :sim 200
+  :alone 50 ; hold for .. ms to register single tap
+  :delay 0 ; TODO: not sure what it's for
+  :held 50 ; time after which the key press is delayed
+  :sim 200 ; keys need to be pressed within this threshold to be considered simultaneous
   :simlayer-threshold 222
   :modifiers {;
     :super-hyper [:command :shift :control :option :fn]
@@ -23,22 +24,27 @@
     :os [:option :shift]
     ;
   }
+
+  :devices {:kinesis [{:vendor_id 1523 :product_id 7}]}
+
   :applications {
     :code ["com.microsoft.VSCode"]
   }
 
-
   :simlayers {
     :a--alt-mode {:key :a}
-    :s--alt-shift-mode {:key :s}
-    :d--mode {:key :d}
+    :s-mode {:key :s}
+    :d-mode {:key :d}
     :v--mode {:key :v}
     :n--mode {:key :n}
     :g--cursor-mode {:key :g}
-    :f--movement-mode {:key :f}
+    :f-mode {:key :f}
   }
   :templates {
     :launch "osascript -e 'tell application \"%s\" to activate'"
+    :alfred "osascript -e 'tell application \"Alfred 3\" to run trigger \"%s\" in workflow \"%s\" with argument \"%s\"'"
+    :open "open \"%s\""
+    :open-a "open -a '%s'"
   }
 
   :tos {
@@ -47,18 +53,34 @@
     :cursor_find_match {:key :d :modi :command}
     :cursor_above {:key :up_arrow :modi :co}
     :cursor_below {:key :down_arrow :modi :co}
+    :multi_word_select  {:key :d :modi :command}
     :acejump {:key :j :modi :cos}
     :acejump_line {:key :l :modi :cos}
     :acejump_selection {:key :s :modi :cos}
     :acejump_multi {:key :m :modi :cos}
+    :alfred_shortcut {:key :spacebar :modi :option}
+
   }
 
   :main [
     {:des "caps lock"
      :rules [
-       [:caps_lock :!!spacebar]
+       ; disable default caps lock behaviour. Tap to open alfred. Hold to activate launch mode
+       [:caps_lock {:set ["launch-mode", 1]} nil {:alone :alfred_shortcut :afterup {:set ["launch-mode", 0]}}]
      ]
     }
+
+    {:des "shift acts as backspace"
+     :rules [
+      ;  delete single letters backwards or forwards
+       [:left_shift :left_shift nil {:alone :delete_or_backspace}]
+       [:right_shift :right_shift nil {:alone :delete_forward}]
+      ; delete whole words backwards or forwards
+       [{:key :right_shift :modi :left_shift} :!Odelete_forward]
+       [{:key :left_shift :modi :right_shift} :!Odelete_or_backspace]
+     ]
+    }
+
     {:des "code"
       :rules [
         [:condi :code :n--mode]
@@ -79,69 +101,64 @@
         ; [:l, [:spacebar :!Shyphen :!Speriod :spacebar]] ; =>
       ]
     }
-    {:des "homerow cursor movement"
-      :rules [:f--movement-mode
-        [:condi :code :f--movement-mode]
+    {:des "cursor: moving"
+      :rules [:f-mode
+        [:condi :code :f-mode]
         [:##y :!Cleft_arrow] ; move to start of line
-        [:##u :!Oleft_arrow] ; move one word left
+        [:##u :!Oleft_arrow] ; move 1 word left
         [:##i :!Oright_arrow] ; move one word right
         [:##o :!Cright_arrow] ; move to end of line
+
         [:##h :left_arrow]
         [:##j :down_arrow]
         [:##k :up_arrow]
         [:##l :right_arrow]
 
-
+        [:##n :!Cdown_arrow] ; end
+        [:##m :page_down]  ; page down
+        [:##comma :page_up] ; page up
+        [:##period :!Cup_arrow] ; home
       ]
     }
-    {:des "homerow alt+shift"
-      :rules [:s--alt-shift-mode
-        [:##h :!OSleft_arrow]
-        [:##j :!OSdown_arrow]
-        [:##k :!OSup_arrow]
-        [:##l :!OSright_arrow]
-        ;
-    ]}
 
-    {:des "homerow shift"
-      :rules [:d--mode
-        [:##y :!Shome]
-        [:##o :!Send]
+    {:des "cursor: selecting"
+      :rules [:d-mode
+        [:condi :code :d-mode]
+        [:##y :!CSleft_arrow] ; select to start of line
+        [:##u :!SOleft_arrow] ; select 1 word left
+        [:##i :!SOright_arrow] ; select 1 word right
+        [:##o :!CSright_arrow] ; select to end of line
 
         [:##h :!Sleft_arrow]
         [:##j :!Sdown_arrow]
         [:##k :!Sup_arrow]
         [:##l :!Sright_arrow]
-    ]}
 
-    {:des "homerow alt"
-      :rules [:a--alt-mode
-      [:##h :!Oleft_arrow]
-      [:##j :!Odown_arrow]
-      [:##k :!Oup_arrow]
-      [:##l :!Oright_arrow]
-      ;
-    ]}
+        [:##n :!SCdown_arrow] ; select to end
+        [:##m :!Spage_down]  ; select page down
+        [:##comma :!Spage_up] ; select page up
+        [:##period :!SCup_arrow] ; select to home
+      ]
+    }
 
-    {:des "homerow cursor"
-      :rules [:g--cursor-mode
-              [:h :cursor_find_match]
-              [:j :cursor_below]
-              [:k :cursor_above]
-              ; [:u :acejump]
-              ; [:i :acejump_line]
-              ; [:m :acejump_multi]
-              ; [:left_shift :acejump_selection]
-              ]
-     }
+    {:des "cursor: multi select"
+      :rules [:s-mode
+        [:condi :code :s-mode]
+
+        [:##h :multi_word_select]
+        [:##j :!COdown_arrow]
+        [:##k :!COup_arrow]
+      ]
+    }
 
     {:des "lauch mode"
-      :rules [:d--mode
-      [:v [:launch "Visual Studio Code"]]    ;
-      [:s [:launch "Slack"]]    ;
-      [:i [:launch "iTerm"]]    ;
-      [:t [:launch "Sourcetree"]]    ;
-      [:b [:launch "Firefox"]]    ;
+      :rules [:launch-mode
+      [:j [:launch "Visual Studio Code"]]    ;
+      [:k [:launch "iTerm"]]    ;
+      [:l [:launch "Firefox"]]    ;
+      [:semicolon [:launch "Sourcetree"]]    ;
+      [:u [:launch "Slack"]]    ;
+      [:p [:open-a "1Password 7"]]    ;
     ]}
 
     ; {:des "disabled keys"
