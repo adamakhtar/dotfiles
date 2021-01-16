@@ -1,6 +1,6 @@
 # Shell aliases
 alias reload!='source ~/.zshrc'
-alias dotfiles='code ~/dotfiles'
+alias dotfiles='code ~/Project/archive/dotfiles'
 alias myblog='cd ~/projects/active/blogs/adamakhtar'
 
 alias cp='cp -i'                           # Preferred 'cp' implementation - ask for confirmation
