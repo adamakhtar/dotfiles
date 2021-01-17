@@ -11,6 +11,7 @@ brew "gh"
 brew "imagemagick"
 brew "bat"
 brew "goku" # karabiner dsl
+brew "minio"
 
 # Programming language prerequisites and package managers
 brew "libyaml" # should come after openssl
