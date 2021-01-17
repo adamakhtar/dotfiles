@@ -103,7 +103,7 @@
     }
     {:des "cursor: moving"
       :rules [:f-mode
-        [:condi :code :f-mode]
+        [:condi :f-mode]
         [:##y :!Cleft_arrow] ; move to start of line
         [:##u :!Oleft_arrow] ; move 1 word left
         [:##i :!Oright_arrow] ; move one word right
@@ -141,13 +141,17 @@
       ]
     }
 
-    {:des "cursor: multi select"
+    {:des "cursor: multi select and manipulate"
       :rules [:s-mode
         [:condi :code :s-mode]
 
         [:##h :multi_word_select]
+        [:##u :!Odown_arrow]
+        [:##i :!Oup_arrow]
         [:##j :!COdown_arrow]
         [:##k :!COup_arrow]
+        [:##m :!SOdown_arrow]
+        [:##comma :!SOup_arrow]
       ]
     }
 
