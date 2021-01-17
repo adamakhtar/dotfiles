@@ -20,6 +20,10 @@ brew "curl"
 brew "yarn"
 brew "gpg" # required by asdf-nodejs
 
+# Mapping tools
+brew "postgis"
+brew "gdal"
+
 # Databases
 brew "postgres", restart_service: :changed
 brew "redis", restart_service: :changed
