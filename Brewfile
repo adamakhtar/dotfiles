@@ -19,6 +19,7 @@ brew "coreutils"
 brew "curl"
 brew "yarn"
 brew "gpg" # required by asdf-nodejs
+brew "the_silver_searcher" # the ag cli tool for fast file searching
 
 # Mapping tools
 brew "postgis"
