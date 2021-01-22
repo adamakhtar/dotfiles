@@ -1,4 +1,4 @@
-;; GOKU_EDN_CONFIG_FILE="karabiner.edm" goku
+;; GOKU_EDN_CONFIG_FILE="karabiner.edn" goku
 ;; main contains multiple manipulators
 ;; each manipulator has a description and multiple rules
 
@@ -123,7 +123,7 @@
 
     {:des "cursor: selecting"
       :rules [:d-mode
-        [:condi :code :d-mode]
+        [:condi :d-mode]
         [:##y :!CSleft_arrow] ; select to start of line
         [:##u :!SOleft_arrow] ; select 1 word left
         [:##i :!SOright_arrow] ; select 1 word right
