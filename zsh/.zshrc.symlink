@@ -24,8 +24,8 @@ autoload -Uz $DOTFILES_ROOT/functions/*(:t)
 # must come before custom compinit definitions
 source $HOME/.asdf/asdf.sh
 
-# To make Homebrew’s completions available in zsh, you must get the Homebrew-managed 
-# zsh site-functions on your FPATH before initialising zsh’s completion facility. 
+# To make Homebrew’s completions available in zsh, you must get the Homebrew-managed
+# zsh site-functions on your FPATH before initialising zsh’s completion facility.
 # Add the following to your ~/.zshrc file:
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
@@ -64,13 +64,16 @@ export GOPATH="$HOME/go"
 
 
 ################
-#  P L U G I N S 
+#  P L U G I N S
 ################
 
 # remember to to run `zplug install` command every time you add a new plugin
 
 source ~/.zplug/init.zsh
-zplug "zsh-users/zsh-completions" 
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "agkozak/zsh-z"
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 zplug load
