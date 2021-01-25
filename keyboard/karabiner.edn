@@ -32,6 +32,7 @@
   }
 
   :simlayers {
+    :1-mode {:key :1}
     :a--alt-mode {:key :a}
     :s-mode {:key :s}
     :d-mode {:key :d}
@@ -39,12 +40,19 @@
     :n--mode {:key :n}
     :g--cursor-mode {:key :g}
     :f-mode {:key :f}
+    :w-mode {:key :w}
   }
   :templates {
     :launch "osascript -e 'tell application \"%s\" to activate'"
     :alfred "osascript -e 'tell application \"Alfred 3\" to run trigger \"%s\" in workflow \"%s\" with argument \"%s\"'"
     :open "open \"%s\""
     :open-a "open -a '%s'"
+    :open-firefox "osascript -e '
+      set address to \"%s\"
+      tell application \"firefox\"
+        open location \"http://\" & address
+      end tell
+      '"
   }
 
   :tos {
@@ -63,10 +71,18 @@
   }
 
   :main [
+
+    {:des "one shots"
+     :rules [
+       ; disable default caps lock behaviour. Tap to open alfred. Hold to activate launch mode
+       [:right_option :right_option nil {:alone :alfred_shortcut}]
+     ]
+    }
+
     {:des "caps lock"
      :rules [
        ; disable default caps lock behaviour. Tap to open alfred. Hold to activate launch mode
-       [:caps_lock {:set ["launch-mode", 1]} nil {:alone :alfred_shortcut :afterup {:set ["launch-mode", 0]}}]
+       [:caps_lock {:set ["launch-mode", 1]} nil {:alone :escape :afterup {:set ["launch-mode", 0]}}]
      ]
     }
 
@@ -157,22 +173,46 @@
 
     {:des "lauch mode"
       :rules [:launch-mode
+      [:h [:!Cgrave_accent_and_tilde]]    ;cycle through windows for an application.
       [:j [:launch "Visual Studio Code"]]    ;
       [:k [:launch "iTerm"]]    ;
       [:l [:launch "Firefox"]]    ;
       [:semicolon [:launch "Sourcetree"]]    ;
       [:u [:launch "Slack"]]    ;
       [:p [:open-a "1Password 7"]]    ;
+      [:n [:open-a "Things3"]]    ;
     ]}
 
-    ; {:des "disabled keys"
-    ;   :rules [
-    ;     [:left_arrow :vk_none]
-    ;     [:right_arrow :vk_none]
-    ;     [:down_arrow :vk_none]
-    ;     [:up_arrow :vk_none]
-    ;   ]
-    ; }
+    {:des "website-mode"
+      :rules [:1-mode
+      ;open urls to often visited websites
+      [:a [:open-firefox "analytics.google.com/analytics/web"]]
+      [:c [:open-firefox "search.google.com/search-console"]]
+      [:s [:open-firefox "stripe.com/dashboard"]]
+      [:h [:open-firefox "dashboard.heroku.com"]]
+      [:g [:open-firefox "github.com"]]
+      ; [:g [:open-firefox "mail.google.com"]]
+      ; [:j [:open-firefox "js.new"]];
+      ; [:k [:open-firefox "github.com/search?q=extension%3A.edn+filename%3Akarabiner.edn&type=Code&ref=advsearch&l=&l="]]
+      ; [:l [:open-firefox "localhost:3000"]]
+      ; [:m [:open-firefox "access.mymind.com/cards"]]
+      ; [:n [:open-firefox "news.google.com"]]
+      ; [:r [:open-firefox "app.restream.io/titles"]]
+      ; [:t [:open-firefox "twitter.com"]]
+      ; [:u [:open-firefox "egghead.io/lessons/new"]];Upload
+      ; [:x [:open-firefox "next.egghead.io"]]
+      ; [:y [:open-firefox "youtube.com"]]
+    ]}
+
+    {:des "disabled keys"
+      :rules [
+        ; [:left_arrow :vk_none]
+        ; [:right_arrow :vk_none]
+        ; [:down_arrow :vk_none]
+        ; [:up_arrow :vk_none]
+        ; [:!Ctab :vk_none]
+      ]
+    }
   ]
 }
 
