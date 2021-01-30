@@ -33,7 +33,9 @@
 
   :simlayers {
     :1-mode {:key :1}
+    :0-mode {:key :0}
     :a--alt-mode {:key :a}
+    :e-mode {:key :e}
     :s-mode {:key :s}
     :d-mode {:key :d}
     :v--mode {:key :v}
@@ -173,7 +175,6 @@
 
     {:des "lauch mode"
       :rules [:launch-mode
-      [:h [:!Cgrave_accent_and_tilde]]    ;cycle through windows for an application.
       [:j [:launch "Visual Studio Code"]]    ;
       [:k [:launch "iTerm"]]    ;
       [:l [:launch "Firefox"]]    ;
@@ -181,6 +182,28 @@
       [:u [:launch "Slack"]]    ;
       [:p [:open-a "1Password 7"]]    ;
       [:n [:open-a "Things3"]]    ;
+      [:b [:open-a "Bear"]]    ;
+    ]}
+
+    {:des "window management"
+      :rules [:w-mode
+      [:8 [:!CTOleft_arrow]]    ;ShiftIt - move window to 50% left
+      [:9 [:!CTOright_arrow]]    ;ShiftIt- move window to 50% right
+      [:0 [:!CTOm]]    ;ShiftIt - maximise the window
+      [:h [:!Cgrave_accent_and_tilde]]    ;cycle through windows for an application.
+      [:j :!Ttab]    ; ctrl + tab - cycle through tabs
+      [:k :!STtab]    ; shift + ctrl + tab - reverse cycle through tabs
+      [:l :!Cw]    ; close tab
+    ]}
+
+    {:des "editor mode (VS CODE)"
+      :rules [
+      [:condi :code :e-mode]
+      [:h [:!Copen_bracket]] ; vscode indent left
+      [:l [:!Cclose_bracket]] ; vscode indent right
+      [:u [:!C1]] ; open/switch to group 1
+      [:i [:!C2]] ; open/switch to group 2
+      [:t [:!Cp]] ; search and open file
     ]}
 
     {:des "website-mode"
@@ -191,6 +214,9 @@
       [:s [:open-firefox "stripe.com/dashboard"]]
       [:h [:open-firefox "dashboard.heroku.com"]]
       [:g [:open-firefox "github.com"]]
+      [:y [:open-firefox "youtube.com"]]
+      [:m [:open-firefox "youtube.com/playlist?list=PLGMD2WaLNtFXg4PU7U3LuisbQjdDDUyLW"]] ; my youtube music playlist
+      [:t [:open-firefox "tacchistudios.harvestapp.com/time"]] ;
       ; [:g [:open-firefox "mail.google.com"]]
       ; [:j [:open-firefox "js.new"]];
       ; [:k [:open-firefox "github.com/search?q=extension%3A.edn+filename%3Akarabiner.edn&type=Code&ref=advsearch&l=&l="]]
@@ -204,13 +230,25 @@
       ; [:y [:open-firefox "youtube.com"]]
     ]}
 
+
+
     {:des "disabled keys"
       :rules [
         ; [:left_arrow :vk_none]
         ; [:right_arrow :vk_none]
         ; [:down_arrow :vk_none]
         ; [:up_arrow :vk_none]
-        ; [:!Ctab :vk_none]
+        [:!Ctab :vk_none] ; ctrl tab
+        [:!Ttab :vk_none]    ; ctrl + tab - cycle through tabs
+        [:!STtab :vk_none]    ; shift + ctrl + tab - reverse cycle through tabs
+        [:!Cw :vk_none]    ; close tab
+
+        [:condi :code]
+        [:!Copen_bracket :vk_none ]; vscode indent left
+        [:!Cclose_bracket :vk_none ]; vscode indent right
+        [:!C1 :vk_none ] ; open/switch to group 1
+        [:!C2 :vk_none] ; open/switch to group 2
+        [:!Cp :vk_none] ; search and open file
       ]
     }
   ]
