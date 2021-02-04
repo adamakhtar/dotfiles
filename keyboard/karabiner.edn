@@ -9,9 +9,9 @@
   :alone 50 ; hold for .. ms to register single tap
   :delay 0 ; TODO: not sure what it's for
   :held 50 ; time after which the key press is delayed
-  :sim 200 ; keys need to be pressed within this threshold to be considered simultaneous
-  :simlayer-threshold 222
-  :modifiers {;
+  :sim 70 ; keys need to be pressed within this threshold to be considered simultaneous
+  :simlayer-threshold 90
+  :modifiers {
     :super-hyper [:command :shift :control :option :fn]
     :hyper [:command :shift :control :option]
     :cos [:command :shift :option]
@@ -101,17 +101,17 @@
 
     {:des "code"
       :rules [
-        [:condi :code :n--mode]
-        [:a :close_bracket] ; [
-        [:s :!Sclose_bracket] ; {
-        [:d :!Sbackslash] ; }
-        [:f :backslash] ; ]
-        [:g :international1] ; _
+        ; [:condi :code :n--mode]
+        ; [:a :close_bracket] ; [
+        ; [:s :!Sclose_bracket] ; {
+        ; [:d :!Sbackslash] ; }
+        ; [:f :backslash] ; ]
+        ; [:g :international1] ; _
 
-        [:condi :code :v--mode]
-        [:h, :hyphen] ; -
-        [:j, :!S8] ; (
-        [:k, :!S9] ; )
+        ; [:condi :code :v--mode]
+        ; [:h, :hyphen] ; -
+        ; [:j, :!S8] ; (
+        ; [:k, :!S9] ; )
 
         ; [:condi :code :g--mode]
         ; [:j, [:spacebar :!Shyphen :spacebar]] ; =
@@ -183,6 +183,9 @@
       [:p [:open-a "1Password 7"]]    ;
       [:n [:open-a "Things3"]]    ;
       [:b [:open-a "Bear"]]    ;
+      [:f [:open-a "Finder"]]    ;
+      [:g [:open-a "Figma"]]    ;
+      [:c [:open-a "Google Chrome"]]    ;
     ]}
 
     {:des "window management"
@@ -194,6 +197,7 @@
       [:j :!Ttab]    ; ctrl + tab - cycle through tabs
       [:k :!STtab]    ; shift + ctrl + tab - reverse cycle through tabs
       [:l :!Cw]    ; close tab
+      [:m :!Cm]    ; minimize window
     ]}
 
     {:des "editor mode (VS CODE)"
@@ -210,6 +214,7 @@
       :rules [:1-mode
       ;open urls to often visited websites
       [:a [:open-firefox "analytics.google.com/analytics/web"]]
+      [:e [:open-firefox "gmail.com"]]
       [:c [:open-firefox "search.google.com/search-console"]]
       [:s [:open-firefox "stripe.com/dashboard"]]
       [:h [:open-firefox "dashboard.heroku.com"]]
