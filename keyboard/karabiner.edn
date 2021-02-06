@@ -186,6 +186,7 @@
       [:f [:open-a "Finder"]]    ;
       [:g [:open-a "Figma"]]    ;
       [:c [:open-a "Google Chrome"]]    ;
+      [:v [:open-a "Preview"]]    ;
     ]}
 
     {:des "window management"
