@@ -6,11 +6,14 @@
 ;; manipulator         -> {:des "..." :rules [rule1 rule2 ...]}
 ;; manipulator's rules -> [rule1 rule2 ...]
 {
-  :alone 50 ; hold for .. ms to register single tap
-  :delay 0 ; TODO: not sure what it's for
-  :held 50 ; time after which the key press is delayed
-  :sim 70 ; keys need to be pressed within this threshold to be considered simultaneous
-  :simlayer-threshold 90
+  ;; AA - not sure what these timings actually mean but I found them from here
+  ;; https://github.com/yqrashawn/yqdotfiles/blob/0205e4bb7a1c76f3e79ceb2c915b4e85bc8062ba/.config/karabiner.edn#L1-L2
+  ;; and they seem to work and prevent misfirings when usign sim keys.
+  :alone 500 ; hold for .. ms to register single tap
+  :delay 500 ; TODO: not sure what it's for
+  :held 500 ; time after which the key press is delayed
+  :sim 50 ; keys need to be pressed within this threshold to be considered simultaneous
+  ;; :simlayer-threshold 130
   :modifiers {
     :super-hyper [:command :shift :control :option :fn]
     :hyper [:command :shift :control :option]
@@ -235,8 +238,6 @@
       ; [:x [:open-firefox "next.egghead.io"]]
       ; [:y [:open-firefox "youtube.com"]]
     ]}
-
-
 
     {:des "disabled keys"
       :rules [
