@@ -225,8 +225,9 @@
       [:g [:open-firefox "github.com"]]
       [:y [:open-firefox "youtube.com"]]
       [:m [:open-firefox "youtube.com/playlist?list=PLGMD2WaLNtFXg4PU7U3LuisbQjdDDUyLW"]] ; my youtube music playlist
-      [:t [:open-firefox "tacchistudios.harvestapp.com/time"]] ;
-      ; [:g [:open-firefox "mail.google.com"]]
+      ;; [:t [:open-firefox "tacchistudios.harvestapp.com/time"]] ; move to a tacchi/work sim key?
+      [:o [:open-firefox "onelook.com/"]]
+      [:t [:open-firefox "translate.google.com"]]
       ; [:j [:open-firefox "js.new"]];
       ; [:k [:open-firefox "github.com/search?q=extension%3A.edn+filename%3Akarabiner.edn&type=Code&ref=advsearch&l=&l="]]
       ; [:l [:open-firefox "localhost:3000"]]
