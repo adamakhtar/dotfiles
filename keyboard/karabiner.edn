@@ -46,6 +46,7 @@
     :g--cursor-mode {:key :g}
     :f-mode {:key :f}
     :w-mode {:key :w}
+    :quote-mode {:key :quote}
   }
   :templates {
     :launch "osascript -e 'tell application \"%s\" to activate'"
@@ -58,6 +59,12 @@
         open location \"http://\" & address
       end tell
       '"
+    :paste "osascript -e '
+            set the clipboard to \"%s\"
+            tell application \"System Events\"
+                    keystroke \"v\" using command down
+            end tell
+            '"
   }
 
   :tos {
@@ -72,7 +79,7 @@
     :acejump_selection {:key :s :modi :cos}
     :acejump_multi {:key :m :modi :cos}
     :alfred_shortcut {:key :spacebar :modi :option}
-
+    :emoji_picker {:key :spacebar :modi :ct} ;!CTspacebar
   }
 
   :main [
@@ -88,6 +95,13 @@
      :rules [
        ; disable default caps lock behaviour. Tap to open alfred. Hold to activate launch mode
        [:caps_lock {:set ["launch-mode", 1]} nil {:alone :escape :afterup {:set ["launch-mode", 0]}}]
+     ]
+    }
+
+    {:des "tab key acts like hyper key"
+     :rules [
+       ; disable default caps lock behaviour. Tap to open alfred. Hold to activate launch mode
+       [:tab [:left_shift :left_command :left_option :left_control] nil {:alone :tab}]
      ]
     }
 
@@ -231,14 +245,48 @@
       ; [:j [:open-firefox "js.new"]];
       ; [:k [:open-firefox "github.com/search?q=extension%3A.edn+filename%3Akarabiner.edn&type=Code&ref=advsearch&l=&l="]]
       ; [:l [:open-firefox "localhost:3000"]]
-      ; [:m [:open-firefox "access.mymind.com/cards"]]
+      ; [a:m [:open-firefox "access.mymind.com/cards"]]
       ; [:n [:open-firefox "news.google.com"]]
-      ; [:r [:open-firefox "app.restream.io/titles"]]
+      [:r [:open-firefox "app.grammarly.com"]]
       ; [:t [:open-firefox "twitter.com"]]
       ; [:u [:open-firefox "egghead.io/lessons/new"]];Upload
       ; [:x [:open-firefox "next.egghead.io"]]
       ; [:y [:open-firefox "youtube.com"]]
     ]}
+
+    {:des "emoji"
+         :rules [:quote-mode
+                 [:a [:paste "🤯"]] ;
+                 [:b [:paste "😊"]] ;blush
+                 [:c [:paste "👏"]] ;clap
+                 [:d [:paste "🧐"]] ;dignified
+                 [:e :emoji_picker]
+                 [:f [:paste "🤦‍♂️"]] ;facepalm️
+                 [:g [:paste "😬"]] ;grimace
+                 [:h [:paste "😍"]] ;heart-eyes
+                 [:i [:paste "👀"]] ;I
+                 [:j [:paste "😂"]] ;joking
+                 [:k [:paste ""]] ;
+                 [:l [:paste "❤️"]] ;love
+                 [:m [:paste "💪"]] ;muscl
+                 [:n :emoji_picker] ;
+                 [:o [:paste "💩"]] ;pOop
+                 [:p [:paste "🎉"]] ;party
+                 [:q [:paste "🤫"]] ;quiet
+                 [:r [:paste "🏎"]] ;racecar
+                 [:s [:paste "😢"]] ;sad
+                 [:t [:paste "🤔"]] ;thinking
+                 [:u [:paste "🤷‍♂️"]] ;shrUg
+                 [:v [:paste "😎"]] ;very cool
+                 [:w [:paste "😉"]] ;wink:
+                 [:x [:paste "😵"]] ;x-eyes
+                 [:y [:paste "😅"]] ;sweatY
+                 [:comma [:paste "👇"]] ;sweatYu
+                 [:period [:paste "☝"]] ;sweatYu
+                 [:left_command [:paste "👍"]]
+                 [:left_option [:paste "👎"]]
+                 ;
+                 ]}
 
     {:des "disabled keys"
       :rules [
