@@ -204,6 +204,7 @@
       [:g [:open-a "Figma"]]    ;
       [:c [:open-a "Google Chrome"]]    ;
       [:v [:open-a "Preview"]]    ;
+      [:i [:open-a "Simulator"]]    ;
     ]}
 
     {:des "window management"
