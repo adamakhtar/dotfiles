@@ -13,7 +13,8 @@ brew "bat"
 brew "goku" # karabiner dsl
 brew "minio"
 brew "htop" # process viewer / manager
-
+brew "php@7.2"
+brew "mysql"
 # Programming language prerequisites and package managers
 brew "libyaml" # should come after openssl
 brew "coreutils"
