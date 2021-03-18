@@ -62,6 +62,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # See: https://www.callicoder.com/golang-installation-setup-gopath-workspace/
 export GOPATH="$HOME/go"
 
+# for Laravel and Composer
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
 
 ################
 #  P L U G I N S
