@@ -13,7 +13,7 @@ brew "bat"
 brew "goku" # karabiner dsl
 brew "minio"
 brew "htop" # process viewer / manager
-brew "php@7.2"
+brew "php"
 brew "mysql"
 # Programming language prerequisites and package managers
 brew "libyaml" # should come after openssl
@@ -32,6 +32,7 @@ brew "postgres", restart_service: :changed
 brew "redis", restart_service: :changed
 
 # Applications
+cask "adoptopenjdk/openjdk/adoptopenjdk8" # android development
 cask "karabiner-elements"
 cask "iterm2"
 cask "firefox"
