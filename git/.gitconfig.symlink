@@ -57,6 +57,7 @@
   # git unremove app/views/hello.html.erb
   unremove = "!f() { git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"; }; f"
 
+  wip = "commit -am 'WIP'"
 
   # List all your branches in date asc order of their last commit
   # E.g.
@@ -78,7 +79,7 @@
   path = ~/.gitconfig.local
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
